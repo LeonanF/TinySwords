@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://blnaqdx6g6iwj"]
+
+[node name="GoblinTntRed" type="CharacterBody2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="body" type="CollisionShape2D" parent="."]
