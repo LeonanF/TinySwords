@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwk7t670qtno4"]
+
+[ext_resource type="Texture2D" uid="uid://cemxeg8g00msp" path="res://Textures/Constructions/Tower_Purple.png" id="1_nkhxj"]
+[ext_resource type="Script" path="res://Scripts/construction_back.gd" id="2_vo1gh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cps1p"]
+radius = 39.0
+height = 104.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pbxwv"]
+radius = 60.0
+height = 127.5
+
+[node name="TowerReady" type="Node2D" groups=["buildings"]]
+
+[node name="TowerBody" type="StaticBody2D" parent="."]
+
+[node name="TowerCollision" type="CollisionShape2D" parent="TowerBody"]
+position = Vector2(0, 60)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_cps1p")
+
+[node name="TowerSprite" type="Sprite2D" parent="TowerBody"]
+texture_filter = 1
+texture = ExtResource("1_nkhxj")
+
+[node name="TowerBack" type="Area2D" parent="."]
+script = ExtResource("2_vo1gh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerBack"]
+position = Vector2(0, -24.75)
+shape = SubResource("CapsuleShape2D_pbxwv")

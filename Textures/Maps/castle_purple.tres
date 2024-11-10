@@ -1,0 +1,13 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://b378882rrl52"]
+
+[ext_resource type="Texture2D" uid="uid://2cl5xtrx54hr" path="res://Textures/Maps/Castle_Purple.png" id="1_jgf1t"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cmgx4"]
+texture = ExtResource("1_jgf1t")
+0:0/size_in_atlas = Vector2i(20, 16)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(100.8, 113.6, 144, 75.2, 144, 6.4, -144, 4.8, -144, 73.6, -105.6, 113.6)
+
+[resource]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_cmgx4")

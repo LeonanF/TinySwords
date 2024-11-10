@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwpbpuaqhkhlj"]
+
+[ext_resource type="Texture2D" uid="uid://cevmus7pjhftb" path="res://Textures/Constructions/House_Destroyed.png" id="1_5dr6e"]
+[ext_resource type="Script" path="res://Scripts/house_destroyed.gd" id="1_443ej"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pcyhd"]
+radius = 42.9999
+height = 104.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccygh"]
+size = Vector2(152, 140)
+
+[node name="HouseDestroyed" type="Node2D"]
+position = Vector2(-214, -360)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_443ej")
+
+[node name="HouseBody" type="StaticBody2D" parent="."]
+
+[node name="HouseCollision" type="CollisionShape2D" parent="HouseBody"]
+position = Vector2(0, 65)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_pcyhd")
+
+[node name="HouseSprite" type="Sprite2D" parent="HouseBody"]
+position = Vector2(0, 40)
+texture = ExtResource("1_5dr6e")
+
+[node name="HouseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HouseArea"]
+position = Vector2(-2, 64)
+shape = SubResource("RectangleShape2D_ccygh")

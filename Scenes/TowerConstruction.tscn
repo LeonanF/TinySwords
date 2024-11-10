@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcl3b1rj4k1j6"]
+
+[ext_resource type="Texture2D" uid="uid://c2m10iis3j3c8" path="res://Textures/Constructions/Tower_Construction.png" id="1_o2uty"]
+[ext_resource type="Script" path="res://Scripts/tower_construction.gd" id="1_v4lot"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kjt0f"]
+radius = 40.0
+height = 98.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vhurd"]
+radius = 42.5
+height = 104.0
+
+[node name="TowerConstruction" type="Node2D"]
+script = ExtResource("1_v4lot")
+construction_time = null
+
+[node name="TowerBody" type="StaticBody2D" parent="."]
+
+[node name="TowerSprite" type="Sprite2D" parent="TowerBody"]
+texture = ExtResource("1_o2uty")
+
+[node name="TowerCollision" type="CollisionShape2D" parent="TowerBody"]
+position = Vector2(0, 60)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_kjt0f")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_top = 50.0
+offset_right = 4.0
+offset_bottom = 77.0
+metadata/_edit_use_anchors_ = true
+
+[node name="TowerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerArea"]
+position = Vector2(0, 60.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vhurd")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxdg8rfl2qtib"]
+
+[ext_resource type="Script" path="res://addons/dialogic/Editor/dialogic_editor.gd" id="1_2n3nd"]
+
+[node name="DialogueBox" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_2n3nd")

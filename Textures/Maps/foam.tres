@@ -1,0 +1,60 @@
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://bpws5w5tjmxon"]
+
+[ext_resource type="Texture2D" uid="uid://e231mwwocu67" path="res://Textures/Maps/Foam.png" id="1_2hjur"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_x0wdq"]
+tile_data = PackedInt32Array(65536, 196614, 1, 1, 262150, 0, 65537, 262150, 1, 131073, 262150, 2, 65538, 327686, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ne7v4"]
+texture = ExtResource("1_2hjur")
+texture_region_size = Vector2i(64, 64)
+0:1/animation_columns = 8
+0:1/animation_separation = Vector2i(2, 0)
+0:1/animation_frame_0/duration = 0.1
+0:1/animation_frame_1/duration = 0.1
+0:1/animation_frame_2/duration = 0.1
+0:1/animation_frame_3/duration = 0.1
+0:1/animation_frame_4/duration = 0.1
+0:1/animation_frame_5/duration = 0.1
+0:1/animation_frame_6/duration = 0.1
+0:1/animation_frame_7/duration = 0.1
+0:1/0 = 0
+2:1/animation_columns = 8
+2:1/animation_separation = Vector2i(2, 0)
+2:1/animation_frame_0/duration = 0.2
+2:1/animation_frame_1/duration = 0.2
+2:1/animation_frame_2/duration = 0.1
+2:1/animation_frame_3/duration = 0.1
+2:1/animation_frame_4/duration = 0.1
+2:1/animation_frame_5/duration = 0.1
+2:1/animation_frame_6/duration = 0.1
+2:1/animation_frame_7/duration = 0.1
+2:1/0 = 0
+1:2/animation_columns = 8
+1:2/animation_separation = Vector2i(2, 0)
+1:2/animation_frame_0/duration = 0.1
+1:2/animation_frame_1/duration = 0.1
+1:2/animation_frame_2/duration = 0.1
+1:2/animation_frame_3/duration = 0.1
+1:2/animation_frame_4/duration = 0.1
+1:2/animation_frame_5/duration = 0.1
+1:2/animation_frame_6/duration = 0.1
+1:2/animation_frame_7/duration = 0.1
+1:2/0 = 0
+1:0/animation_columns = 8
+1:0/animation_separation = Vector2i(2, 0)
+1:0/animation_frame_0/duration = 0.1
+1:0/animation_frame_1/duration = 0.1
+1:0/animation_frame_2/duration = 0.1
+1:0/animation_frame_3/duration = 0.1
+1:0/animation_frame_4/duration = 0.1
+1:0/animation_frame_5/duration = 0.1
+1:0/animation_frame_6/duration = 0.1
+1:0/animation_frame_7/duration = 0.1
+1:0/0 = 0
+1:1/0 = 0
+
+[resource]
+tile_size = Vector2i(64, 64)
+sources/8 = SubResource("TileSetAtlasSource_ne7v4")
+pattern_0 = SubResource("TileMapPattern_x0wdq")

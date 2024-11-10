@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://dkvsw3gdjpc6m"]
+
+[ext_resource type="Script" path="res://Scripts/pawn.gd" id="1_x6tru"]
+[ext_resource type="Texture2D" uid="uid://cgduca0j8mf78" path="res://Textures/Characters/Pawn_Purple.png" id="1_yyw6a"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rm813"]
+radius = 25.0
+height = 64.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0p3wx"]
+atlas = ExtResource("1_yyw6a")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvl5w"]
+atlas = ExtResource("1_yyw6a")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etp6g"]
+atlas = ExtResource("1_yyw6a")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbei0"]
+atlas = ExtResource("1_yyw6a")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4gxp"]
+atlas = ExtResource("1_yyw6a")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhvjo"]
+atlas = ExtResource("1_yyw6a")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x8vso"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p3wx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvl5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etp6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pbei0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4gxp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhvjo")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="Pawn" type="Node2D"]
+script = ExtResource("1_x6tru")
+
+[node name="PawnBody" type="CharacterBody2D" parent="."]
+
+[node name="PawnCollision" type="CollisionShape2D" parent="PawnBody"]
+shape = SubResource("CapsuleShape2D_rm813")
+
+[node name="PawnSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_x8vso")
+animation = &"idle"
+frame_progress = 0.913571
