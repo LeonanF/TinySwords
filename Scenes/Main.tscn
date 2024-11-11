@@ -77,7 +77,7 @@ position = Vector2(-427, -411)
 position = Vector2(555, 301)
 
 [node name="Tree5" parent="Map" instance=ExtResource("8_srkwl")]
-position = Vector2(515, 128)
+position = Vector2(515, -437)
 
 [node name="Tree6" parent="Map" instance=ExtResource("8_srkwl")]
 position = Vector2(173, 137)
@@ -86,13 +86,13 @@ position = Vector2(173, 137)
 position = Vector2(635, 168)
 
 [node name="Tree8" parent="Map" instance=ExtResource("8_srkwl")]
-position = Vector2(378, 137)
+position = Vector2(442, 17)
 
 [node name="Tree9" parent="Map" instance=ExtResource("8_srkwl")]
-position = Vector2(666, 236)
+position = Vector2(209, -182)
 
 [node name="Tree10" parent="Map" instance=ExtResource("8_srkwl")]
-position = Vector2(428, 205)
+position = Vector2(-121, -136)
 
 [node name="Enemy" parent="Map" instance=ExtResource("9_cqk2a")]
 
