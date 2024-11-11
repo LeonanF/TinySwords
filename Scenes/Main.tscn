@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bvi2pjs0urndr"]
+[gd_scene load_steps=12 format=4 uid="uid://bvi2pjs0urndr"]
 
 [ext_resource type="Script" path="res://Scripts/building_queue.gd" id="2_sx1sb"]
 [ext_resource type="TileSet" uid="uid://col3ak6sc7mi5" path="res://Textures/Maps/water.tres" id="3_ppl7a"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cxoql8lpf7x1m" path="res://Scenes/Enemy.tscn" id="9_cqk2a"]
 [ext_resource type="Script" path="res://Scripts/game_controller.gd" id="10_gr8gc"]
 [ext_resource type="PackedScene" uid="uid://dpfwb3eb4ee3" path="res://Scenes/Scarecrow.tscn" id="10_itxlt"]
+[ext_resource type="PackedScene" uid="uid://bt2h5wo4kb0om" path="res://Scenes/RoadSign.tscn" id="11_k53m0"]
 
 [node name="Main" type="Node2D"]
 
@@ -64,12 +65,6 @@ navigation_enabled = false
 tile_map_data = PackedByteArray("AAAMAAgAAAACAAEAAAAMAAcAAAACAAEAAAAMAAYAAAACAAEAAAAMAAUAAAACAAEAAAAMAAQAAAACAAEAAAAMAAMAAAACAAEAAAALAAIAAAACAAEAAAALAAEAAAACAAEAAAALAAAAAAACAAEAAAAMAP//AAACAAEAAAAMAP7/AAACAAEAAAAMAP3/AAACAAEAAAAMAPz/AAACAAEAAAAMAPv/AAACAAEAAAAMAPr/AAACAAEAAAAMAPn/AAACAAEAAAAMAPj/AAACAAEAAAAMAPf/AAACAAEAAAAMAPb/AAACAAEAAAAMAPX/AAACAAEAAADz////AAAAAAEAAADz//7/AAAAAAEAAADz//3/AAAAAAEAAADz//z/AAAAAAEAAADz//v/AAAAAAEAAADz//r/AAAAAAEAAADz//n/AAAAAAEAAADz//j/AAAAAAEAAADz//f/AAAAAAEAAADz//b/AAAAAAEAAADz//X/AAAAAAEAAAD5/wQAAAAAAAEAAAD5/wMAAAAAAAEAAAD6/wEAAAAAAAEAAAACAAkAAAAAAAEAAAACAAgAAAAAAAEAAAACAAcAAAAAAAEAAAACAAYAAAAAAAEAAAACAAUAAAAAAAEAAAD0//T/AAABAAAAAAD1//T/AAABAAAAAAD2//T/AAABAAAAAAD3//T/AAABAAAAAAD4//T/AAABAAAAAAD5//T/AAABAAAAAAD6//T/AAABAAAAAAD7//T/AAABAAAAAAD8//T/AAABAAAAAAD9//T/AAABAAAAAAD+//T/AAABAAAAAAD///T/AAABAAAAAAAAAPT/AAABAAAAAAABAPT/AAABAAAAAAACAPT/AAABAAAAAAADAPT/AAABAAAAAAAEAPT/AAABAAAAAAAFAPT/AAABAAAAAAAGAPT/AAABAAAAAAAHAPT/AAABAAAAAAAIAPT/AAABAAAAAAAJAPT/AAABAAAAAAAKAPT/AAABAAAAAAALAPT/AAABAAAAAAA=")
 tile_set = ExtResource("6_oqoht")
 navigation_enabled = false
-
-[node name="Scarecrow" parent="Map" instance=ExtResource("10_itxlt")]
-position = Vector2(-492, 397)
-
-[node name="Scarecrow2" parent="Map" instance=ExtResource("10_itxlt")]
-position = Vector2(-96, 643)
 
 [node name="Tree" parent="Map" instance=ExtResource("8_srkwl")]
 position = Vector2(-25, -562)
@@ -135,6 +130,15 @@ autostart = true
 wait_time = 5.0
 one_shot = true
 autostart = true
+
+[node name="Scarecrow" parent="Map" instance=ExtResource("10_itxlt")]
+position = Vector2(-492, 397)
+
+[node name="Scarecrow2" parent="Map" instance=ExtResource("10_itxlt")]
+position = Vector2(-96, 643)
+
+[node name="RoadSign" parent="Map" instance=ExtResource("11_k53m0")]
+position = Vector2(-96, 411)
 
 [node name="Camera" type="Camera2D" parent="."]
 enabled = false
