@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bvi2pjs0urndr"]
+[gd_scene load_steps=11 format=4 uid="uid://bvi2pjs0urndr"]
 
 [ext_resource type="Script" path="res://Scripts/building_queue.gd" id="2_sx1sb"]
 [ext_resource type="TileSet" uid="uid://col3ak6sc7mi5" path="res://Textures/Maps/water.tres" id="3_ppl7a"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b4ss5joyt5pyc" path="res://Scenes/Tree.tscn" id="8_srkwl"]
 [ext_resource type="PackedScene" uid="uid://cxoql8lpf7x1m" path="res://Scenes/Enemy.tscn" id="9_cqk2a"]
 [ext_resource type="Script" path="res://Scripts/game_controller.gd" id="10_gr8gc"]
+[ext_resource type="PackedScene" uid="uid://dpfwb3eb4ee3" path="res://Scenes/Scarecrow.tscn" id="10_itxlt"]
 
 [node name="Main" type="Node2D"]
 
@@ -64,8 +65,14 @@ tile_map_data = PackedByteArray("AAAMAAgAAAACAAEAAAAMAAcAAAACAAEAAAAMAAYAAAACAAE
 tile_set = ExtResource("6_oqoht")
 navigation_enabled = false
 
+[node name="Scarecrow" parent="Map" instance=ExtResource("10_itxlt")]
+position = Vector2(-492, 397)
+
+[node name="Scarecrow2" parent="Map" instance=ExtResource("10_itxlt")]
+position = Vector2(-96, 643)
+
 [node name="Tree" parent="Map" instance=ExtResource("8_srkwl")]
-position = Vector2(-88, 397)
+position = Vector2(-25, -562)
 
 [node name="Tree2" parent="Map" instance=ExtResource("8_srkwl")]
 position = Vector2(419, -252)

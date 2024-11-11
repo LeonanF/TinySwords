@@ -83,11 +83,6 @@ region = Rect2(960, 256, 192, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0g2iu"]
 animations = [{
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fbxet")
@@ -107,9 +102,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3jiqi")
 }],
-"loop": true,
-"name": &"stop_goblin",
-"speed": 5.0
+"loop": false,
+"name": &"idle",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -135,7 +130,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"throw_bomb",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -158,16 +153,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_goblin",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [node name="GoblinTntRed" type="CharacterBody2D"]
 
-[node name="body" type="CollisionShape2D" parent="."]
+[node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_8fdhr")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0g2iu")
-animation = &"walk_goblin"
-frame_progress = 0.381941
+animation = &"throw_bomb"
+frame = 6
+frame_progress = 0.302255
