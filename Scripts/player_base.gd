@@ -4,11 +4,20 @@ class_name Player
 
 @export var damage = 10
 @export var max_health = 100
-var health: int = max_health
-@export var SPEED = 300.0
-@export var trees = 100
-var health_bar : TextureProgressBar
 @onready var player_sprite = $Sprite
+@onready var camera = $Camera
+@onready var attacked_timer = get_parent().get_node("AttackedTimer")
+@onready var regen_timer = get_parent().get_node("RegenerationTimer")
+@export var SPEED = 300.0
+@export var wood = 0
+@export var meat = 0
+@export var gold = 0
+var health: int = max_health
+var health_bar : TextureProgressBar
+var meat_banner: CanvasLayer
+var wood_banner: CanvasLayer
+var gold_banner: CanvasLayer
+
 var invulnerable = false
 var is_walking = false
 
@@ -16,25 +25,41 @@ var direction = Vector2.ZERO
 
 signal game_over
 
-
+func setup_resource_banners(meat_banner, wood_banner, gold_banner):
+	self.meat_banner = meat_banner
+	self.wood_banner = wood_banner
+	self.gold_banner = gold_banner
+	update_resource_banners()
+	
 func setup_health_bar(bar: TextureProgressBar):
 	health_bar = bar
 	update_health_bar()
 
-func has_trees(cost):
-	return trees >= cost
+func has_wood(cost):
+	return wood >= cost
 
-func deduct_trees(amount):
-	trees -= amount
+func deduct_wood(amount):
+	wood -= amount
 
+func gather_resource(resource_type: String, amount: int):
+	match resource_type:
+		"meat":
+			meat += amount
+		"wood":
+			wood += amount
+		"gold":
+			gold += amount
 
+	update_resource_banners()
 
 func _ready():
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if regen_timer and attacked_timer and regen_timer.is_stopped() and attacked_timer.is_stopped() and health<=100:
+		health += 2
+		regen_timer.start()
+		update_health_bar()
 
 func _on_move_right():
 	direction.x += 1
@@ -81,9 +106,17 @@ func not_moving():
 
 func update_health_bar():
 	health_bar.value = health
-
+	
+func update_resource_banners():
+	if meat_banner:
+		meat_banner.get_node("Control").update_resource_value(meat)
+	if wood_banner:
+		wood_banner.get_node("Control").update_resource_value(wood)
+	if gold_banner:
+		gold_banner.get_node("Control").update_resource_value(gold)
+		
 func die():
-	game_over.emit()
+	game_over.emit($Camera.position, $Camera.zoom)
 	queue_free()
 
 func _flash_damage_effect():
@@ -95,7 +128,9 @@ func _flash_damage_effect():
 	player_sprite.modulate = Color(1, 1, 1)
 	invulnerable = false
 
-func _qon_enemy_attack_received(damage):
+func _on_enemy_attack_received(damage):
+	attacked_timer.stop()
+	attacked_timer.start()
 	health -= damage
 	_flash_damage_effect()
 	update_health_bar()

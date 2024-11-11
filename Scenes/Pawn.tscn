@@ -199,7 +199,7 @@ radius = 16.0
 height = 42.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6007i"]
-size = Vector2(28, 27)
+size = Vector2(45, 33.25)
 
 [node name="Pawn" type="CharacterBody2D" groups=["Players"]]
 z_index = 1
@@ -209,16 +209,17 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 safe_margin = 0.001
 script = ExtResource("1_x6tru")
+SPEED = 350.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_x8vso")
 animation = &"collecting"
 autoplay = "idle"
-frame = 4
-frame_progress = 0.848555
+frame = 5
+frame_progress = 1.0
 
-[node name="Body" type="CollisionShape2D" parent="." groups=["Players"]]
+[node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)
 shape = SubResource("CapsuleShape2D_rm813")
 
@@ -242,7 +243,7 @@ position_smoothing_speed = 20.0
 [node name="AxeArea" type="Area2D" parent="."]
 
 [node name="Axe" type="CollisionShape2D" parent="AxeArea"]
-position = Vector2(54, 13)
+position = Vector2(50.5, 13)
 shape = SubResource("RectangleShape2D_6007i")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bvi2pjs0urndr"]
+[gd_scene load_steps=10 format=4 uid="uid://bvi2pjs0urndr"]
 
 [ext_resource type="Script" path="res://Scripts/building_queue.gd" id="2_sx1sb"]
 [ext_resource type="TileSet" uid="uid://col3ak6sc7mi5" path="res://Textures/Maps/water.tres" id="3_ppl7a"]
@@ -6,37 +6,9 @@
 [ext_resource type="TileSet" uid="uid://bpws5w5tjmxon" path="res://Textures/Maps/foam.tres" id="4_m6r5m"]
 [ext_resource type="TileSet" uid="uid://yv6b0q33xu0k" path="res://Textures/Maps/ground_flat.tres" id="5_r4307"]
 [ext_resource type="TileSet" uid="uid://dls6pj57s1q8" path="res://Textures/Maps/ground_shadow.tres" id="6_oqoht"]
-[ext_resource type="Texture2D" uid="uid://df4uo2468if58" path="res://Textures/Resources/Trees/Tree.png" id="8_h2o2q"]
+[ext_resource type="PackedScene" uid="uid://b4ss5joyt5pyc" path="res://Scenes/Tree.tscn" id="8_srkwl"]
+[ext_resource type="PackedScene" uid="uid://cxoql8lpf7x1m" path="res://Scenes/Enemy.tscn" id="9_cqk2a"]
 [ext_resource type="Script" path="res://Scripts/game_controller.gd" id="10_gr8gc"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mufe8"]
-texture = ExtResource("8_h2o2q")
-texture_region_size = Vector2i(192, 192)
-0:0/animation_frame_0/duration = 0.4
-0:0/animation_frame_1/duration = 0.4
-0:0/animation_frame_2/duration = 0.4
-0:0/animation_frame_3/duration = 0.4
-0:0/0 = 0
-0:0/0/y_sort_origin = 55
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 48, 16, 48, 16, 80, -16, 80)
-0:0/0/custom_data_0 = 1
-0:1/animation_frame_0/duration = 0.4
-0:1/animation_frame_1/duration = 0.4
-0:1/0 = 0
-0:1/0/y_sort_origin = 55
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 48, 16, 48, 16, 80, -16, 80)
-0:1/0/custom_data_0 = 2
-0:2/0 = 0
-0:2/0/y_sort_origin = 60
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 48, 16, 48, 16, 80, -16, 80)
-0:2/0/custom_data_0 = 3
-
-[sub_resource type="TileSet" id="TileSet_acbyc"]
-tile_size = Vector2i(64, 64)
-physics_layer_0/collision_layer = 1
-custom_data_layer_0/name = "Type"
-custom_data_layer_0/type = 2
-sources/0 = SubResource("TileSetAtlasSource_mufe8")
 
 [node name="Main" type="Node2D"]
 
@@ -92,8 +64,71 @@ tile_map_data = PackedByteArray("AAAMAAgAAAACAAEAAAAMAAcAAAACAAEAAAAMAAYAAAACAAE
 tile_set = ExtResource("6_oqoht")
 navigation_enabled = false
 
-[node name="Trees" type="TileMapLayer" parent="Map"]
-z_index = 1
-y_sort_enabled = true
-tile_map_data = PackedByteArray("AAABAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAADAP//AAAAAAAAAAADAP3/AAAAAAAAAAD3//r/AAAAAAAAAAD6//f/AAAAAAAAAAAJAPb/AAAAAAAAAAAGAPf/AAAAAAAAAAAKAPr/AAAAAAAAAAABAPn/AAAAAAAAAAD8//v/AAAAAAAAAAAAAPf/AAAAAAAAAAD3//3/AAAAAAIAAAAHAPr/AAAAAAIAAAAJAAMAAAAAAAIAAAADAAMAAAAAAAIAAAD//wEAAAAAAAIAAAAKAPz/AAAAAAIAAAAEAPj/AAAAAAIAAAACAPX/AAAAAAIAAAD2//b/AAAAAAIAAAD///r/AAAAAAIAAAA=")
-tile_set = SubResource("TileSet_acbyc")
+[node name="Tree" parent="Map" instance=ExtResource("8_srkwl")]
+position = Vector2(-88, 397)
+
+[node name="Tree2" parent="Map" instance=ExtResource("8_srkwl")]
+position = Vector2(419, -252)
+
+[node name="Tree3" parent="Map" instance=ExtResource("8_srkwl")]
+position = Vector2(-427, -411)
+
+[node name="Tree4" parent="Map" instance=ExtResource("8_srkwl")]
+position = Vector2(555, 301)
+
+[node name="Tree5" parent="Map" instance=ExtResource("8_srkwl")]
+position = Vector2(515, 128)
+
+[node name="Tree6" parent="Map" instance=ExtResource("8_srkwl")]
+position = Vector2(173, 137)
+
+[node name="Tree7" parent="Map" instance=ExtResource("8_srkwl")]
+position = Vector2(635, 168)
+
+[node name="Tree8" parent="Map" instance=ExtResource("8_srkwl")]
+position = Vector2(378, 137)
+
+[node name="Tree9" parent="Map" instance=ExtResource("8_srkwl")]
+position = Vector2(666, 236)
+
+[node name="Tree10" parent="Map" instance=ExtResource("8_srkwl")]
+position = Vector2(428, 205)
+
+[node name="Enemy" parent="Map" instance=ExtResource("9_cqk2a")]
+
+[node name="Enemy2" parent="Map" instance=ExtResource("9_cqk2a")]
+position = Vector2(323, -557)
+
+[node name="Enemy3" parent="Map" instance=ExtResource("9_cqk2a")]
+position = Vector2(-331, -594)
+
+[node name="Enemy4" parent="Map" instance=ExtResource("9_cqk2a")]
+position = Vector2(-588, -182)
+
+[node name="Enemy5" parent="Map" instance=ExtResource("9_cqk2a")]
+position = Vector2(378, 470)
+
+[node name="Enemy6" parent="Map" instance=ExtResource("9_cqk2a")]
+position = Vector2(700, 397)
+
+[node name="Enemy7" parent="Map" instance=ExtResource("9_cqk2a")]
+position = Vector2(-25, -365)
+
+[node name="Enemy8" parent="Map" instance=ExtResource("9_cqk2a")]
+position = Vector2(635, -269)
+
+[node name="Enemy9" parent="Map" instance=ExtResource("9_cqk2a")]
+position = Vector2(71, 493)
+
+[node name="RegenerationTimer" type="Timer" parent="Map"]
+one_shot = true
+autostart = true
+
+[node name="AttackedTimer" type="Timer" parent="Map"]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Camera" type="Camera2D" parent="."]
+enabled = false
+zoom = Vector2(0.75, 0.75)

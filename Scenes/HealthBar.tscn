@@ -8,9 +8,9 @@
 script = ExtResource("1_7ejvt")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
-offset_left = 1010.0
-offset_top = 14.0
-offset_right = 1138.0
-offset_bottom = 46.0
+offset_left = 1000.0
+offset_top = 20.0
+offset_right = 1128.0
+offset_bottom = 52.0
 texture_under = ExtResource("2_u4ld6")
 texture_progress = ExtResource("3_ta5e0")

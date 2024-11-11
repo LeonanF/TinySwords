@@ -5,7 +5,6 @@ var camera
 
 func _ready():
 	visible = false
-	camera = get_parent().get_parent().get_node("Camera")
 
 func show_game_over():
 	visible = true
@@ -15,6 +14,9 @@ func show_game_over():
 	retry_button.connect("pressed", Callable(self, "_on_retry_pressed"))
 	menu_button.connect("pressed", Callable(self, "_on_menu_pressed"))
 	vbox_container.position = camera.position - vbox_container.size/2
+
+func setup_camera(p_camera):
+	camera = p_camera
 
 func _on_retry_pressed():
 	get_tree().reload_current_scene()

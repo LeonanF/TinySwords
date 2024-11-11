@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=3 uid="uid://b4ss5joyt5pyc"]
+
+[ext_resource type="Texture2D" uid="uid://df4uo2468if58" path="res://Textures/Resources/Trees/Tree.png" id="1_7axv2"]
+[ext_resource type="Script" path="res://Scripts/tree.gd" id="1_64yho"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mplv"]
+atlas = ExtResource("1_7axv2")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyhmp"]
+atlas = ExtResource("1_7axv2")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwkdx"]
+atlas = ExtResource("1_7axv2")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yunr4"]
+atlas = ExtResource("1_7axv2")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5igmy"]
+atlas = ExtResource("1_7axv2")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xe1nr"]
+atlas = ExtResource("1_7axv2")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qpnxa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mplv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyhmp")
+}],
+"loop": false,
+"name": &"being_collected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwkdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yunr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5igmy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xe1nr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fkspn"]
+radius = 13.0
+height = 32.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb6fw"]
+atlas = ExtResource("1_7axv2")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_efhml"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nb6fw")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[node name="Tree" type="StaticBody2D" groups=["Trees"]]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_64yho")
+
+[node name="TreeSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qpnxa")
+animation = &"being_collected"
+frame = 1
+frame_progress = 1.0
+offset = Vector2(0, -50)
+
+[node name="TreeBody" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_fkspn")
+
+[node name="TrunkSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_efhml")
+animation = &"idle"
+frame_progress = 1.0
+offset = Vector2(0, -55)
