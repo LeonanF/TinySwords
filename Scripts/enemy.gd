@@ -3,11 +3,12 @@ extends CharacterBody2D
 const SPEED = 200
 @export var damage: int = 10
 @export var health: int = 50
-@export var detection_range: float = 200
+@export var detection_range: float = 300
 
 var patrol_radius: float = 100
 var patrol_timer = 0.0
 var is_patrolling = false
+var can_search_player = false
 var patrol_center: Vector2
 var patrol_direction = Vector2()
 
@@ -38,7 +39,7 @@ func _ready():
 	enemy_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	enemy_sprite.connect("animation_changed", Callable(self, "_on_animation_changed"))
 
-func _on_animation_changed(old_name, new_name):
+func _on_animation_changed(old_name, _new_name):
 	if old_name == "attack" or old_name =="attack_up" or old_name == "attack_down":
 		attackCooldown.stop()
 		is_attacking = false
@@ -64,33 +65,41 @@ func _physics_process(delta):
 		
 	if player_in_perception_range and not is_attacking:
 		attack()
+		return
 	
-	if is_instance_valid(player) and position.distance_to(player.global_position) <= detection_range and not is_attacking and not player_in_perception_range and start_patrolling.is_stopped():
+	if start_patrolling.is_stopped():
+		can_search_player = true
+		start_patrolling.start()
+	
+	if not player_in_perception_range:
+		enemy_sprite.flip_h = false if velocity.x >= 0 else true
+		if global_position.distance_to(player.global_position) <= detection_range and can_search_player:
 			nav_agent.target_position = player.global_position
-			
 			var current_agent_position = global_position
 			var next_path_position = nav_agent.get_next_path_position()
 			velocity = current_agent_position.direction_to(next_path_position) * SPEED
-		
 			enemy_sprite.play("walk")
 			
 			move_and_slide()
+			
 			if has_collided_with_wall():
-				on_collide_patrol_direction()
-				
-	elif not player_in_perception_range and not is_attacking:
-		patrol(delta)
-		
-	enemy_sprite.flip_h = false if velocity.x >= 0 else true
+				can_search_player = false
+				start_patrolling.start()
+		else:
+			patrol(delta)
+			
 	
 
 func patrol(delta):
+	
 	if not is_patrolling:
-		patrol_timer += delta
-		if patrol_timer >= 0.1:
+		start_patrolling.stop()
+		start_patrolling.start()
+		patrol_timer+=delta
+		if patrol_timer>=0.1:
 			is_patrolling = true
-			patrol_timer = 0.0
-
+			patrol_timer = 0
+			
 	if is_patrolling:
 		if patrol_timer <= 0 or has_collided_with_wall():
 			choose_new_patrol_direction()
@@ -108,8 +117,6 @@ func has_collided_with_wall() -> bool:
 	return false
 
 func on_collide_patrol_direction():
-	start_patrolling.stop()
-	start_patrolling.start()
 
 	var angle = randf_range(0, 2 * PI)
 	patrol_direction = Vector2(cos(angle), sin(angle)).normalized()
@@ -140,6 +147,7 @@ func _on_body_exited(body):
 
 func attack():
 	if is_instance_valid(player) and not is_attacking and attackCooldown.is_stopped():
+		
 		is_attacking = true
 		
 		var direction_to_player = get_node("Sprite").global_position - player.get_node("Sprite").global_position 
@@ -159,11 +167,12 @@ func attack():
 func face_player():
 	if player:
 		var direction_to_player = (player.get_node("Sprite").global_position - get_node("Sprite").global_position)
-
+		
 		if direction_to_player.x < 0:
 			enemy_sprite.flip_h = true
 		else:
 			enemy_sprite.flip_h = false
+
 
 func _on_player_attack_received(damage_amount, body):
 	if body == self:

@@ -54,7 +54,7 @@ func _ready():
 	setup_warrior()
 		
 	game_over_screen = GameOverScreenScene.instantiate()
-	add_child(game_over_screen)
+	camera.add_child(game_over_screen)
 	game_over_screen.visible = false
 
 func _process(_delta):
@@ -131,38 +131,4 @@ func sync_character_state():
 func _on_game_over(p_camera_position, p_camera_zoom):
 	camera.enabled = true
 	camera.zoom = Vector2i(0.75,0.75)
-	game_over_screen.setup_camera(camera)
 	game_over_screen.show_game_over()
-
-"""""
-func _process(_delta):
-	if Input.is_action_just_released("enter_building_mode") and not on_building_mode:
-		enter_building_mode()
-	if Input.is_action_just_released("exit_building_mode") and on_building_mode:
-		exit_building_mode()
-
-func add_building_to_queue(building_type, b_position):
-	building_queue.add_to_queue(building_type, b_position)
-	var construction
-	if building_type=="House":
-		construction = HouseConstructionScene.instantiate()
-		add_child(construction)
-	if building_type=="Tower":
-		construction = TowerConstructionScene.instantiate()
-		add_child(construction)	
-	construction.position = b_position
-	
-func enter_building_mode():
-	on_building_mode = true
-	if not construction_mode:
-		building_entered.emit()
-		construction_mode = ConstructionModeScene.instantiate()
-		add_child(construction_mode)
-
-func exit_building_mode():
-	on_building_mode = false
-	if construction_mode:
-		building_exited.emit()
-		construction_mode.queue_free()
-		construction_mode = null
-"""

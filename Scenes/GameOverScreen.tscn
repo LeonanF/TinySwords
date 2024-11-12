@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Scripts/game_over_screen.gd" id="1_ohpm8"]
 
 [node name="GameOverScreen" type="CanvasLayer"]
-follow_viewport_enabled = true
 script = ExtResource("1_ohpm8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -13,10 +12,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -576.0
-offset_top = -324.0
-offset_right = -424.0
-offset_bottom = -231.0
+offset_left = -76.0
+offset_top = -46.5
+offset_right = 76.0
+offset_bottom = 46.5
 grow_horizontal = 2
 grow_vertical = 2
 
