@@ -49,7 +49,7 @@ func _physics_process(delta):
 		collect()
 	if Input.is_action_just_released("pawn_construct"):
 		construct()
-	
+		
 	if is_collecting or is_constructing:
 		return
 	
@@ -64,7 +64,6 @@ func _on_animation_finished():
 		test_construct()
 		is_constructing=false
 		player_sprite.play("idle")
-
 
 func flip():
 	if direction.x > 0:
@@ -105,7 +104,10 @@ func test_construct():
 	for body in overlapping_bodies:
 		if body.is_in_group("Buildings"):
 			body.build()
+		if body.is_in_group("Destroyed"):
+			body.restore()
 
+			
 func gather_trees(amount):
 	gather_resource("wood", amount)
 
