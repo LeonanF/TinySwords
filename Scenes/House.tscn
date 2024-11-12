@@ -11,6 +11,7 @@ y_sort_enabled = true
 position = Vector2(-1, -1)
 
 [node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("1_ijqp2")
 
 [node name="Body" type="CollisionShape2D" parent="."]

@@ -15,6 +15,7 @@ script = ExtResource("1_mjhq8")
 
 [node name="Icon" type="Sprite2D" parent="Control"]
 z_index = 1
+texture_filter = 1
 scale = Vector2(0.5, 0.5)
 
 [node name="Value" type="Label" parent="Control"]

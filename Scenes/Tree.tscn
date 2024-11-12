@@ -83,6 +83,7 @@ y_sort_enabled = true
 script = ExtResource("1_64yho")
 
 [node name="TreeSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_qpnxa")
 animation = &"being_collected"
 frame = 1
@@ -94,6 +95,7 @@ position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_fkspn")
 
 [node name="TrunkSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_efhml")
 animation = &"idle"
 frame_progress = 1.0

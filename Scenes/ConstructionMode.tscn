@@ -11,6 +11,7 @@ size = Vector2(99, 97)
 script = ExtResource("1_oqlik")
 
 [node name="BuildingSprite" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("1_j0kvt")
 
 [node name="BuildingArea" type="Area2D" parent="BuildingSprite"]
