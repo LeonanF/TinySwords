@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwk7t670qtno4"]
+
+[ext_resource type="Texture2D" uid="uid://cemxeg8g00msp" path="res://Textures/Constructions/Tower_Purple.png" id="1_fkhbr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cps1p"]
+radius = 39.0
+height = 104.0
+
+[node name="Tower" type="StaticBody2D" groups=["buildings"]]
+z_index = 1
+y_sort_enabled = true
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(0, 45)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_cps1p")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_fkhbr")
+offset = Vector2(0, -15)

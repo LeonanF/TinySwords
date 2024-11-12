@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmj6d60b4xeh5"]
+
+[ext_resource type="Texture2D" uid="uid://bd5cy0466s1ed" path="res://Textures/Constructions/Tower_Destroyed.png" id="1_0fswd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xunby"]
+radius = 46.0
+height = 142.0
+
+[node name="TowerDestroyed" type="StaticBody2D"]
+z_index = 1
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(2, 59)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xunby")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_0fswd")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bostsa441piym"]
+
+[ext_resource type="Texture2D" uid="uid://cbrboqkto13wm" path="res://Textures/Constructions/Castle_Destroyed.png" id="1_6dhgb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_45ixf"]
+radius = 64.0
+height = 336.0
+
+[node name="CastleDestroyed" type="StaticBody2D"]
+z_index = 1
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_6dhgb")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(0, 64)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_45ixf")
