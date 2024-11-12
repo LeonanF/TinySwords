@@ -169,6 +169,7 @@ func attack():
 		else:
 			enemy_sprite.play("attack_down")
 		
+		await get_tree().create_timer(0.3).timeout
 		attack_audio.play()
 
 func face_player():
