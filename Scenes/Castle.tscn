@@ -1,7 +1,20 @@
-[gd_scene format=3 uid="uid://cqnr5vi0kpab5"]
+[gd_scene load_steps=3 format=3 uid="uid://cqnr5vi0kpab5"]
+
+[ext_resource type="Texture2D" uid="uid://2cl5xtrx54hr" path="res://Textures/Maps/Castle_Purple.png" id="1_vn21b"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qdo50"]
+radius = 59.0
+height = 286.0
 
 [node name="Castle" type="StaticBody2D"]
+z_index = 1
+y_sort_enabled = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_vn21b")
+offset = Vector2(0, -30)
 
 [node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(0, 28)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qdo50")

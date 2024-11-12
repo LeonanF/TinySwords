@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://cerrnrxcv7jnx"]
+
+[ext_resource type="Texture2D" uid="uid://cb3cnbdvsc6ry" path="res://Textures/Constructions/Castle_Construction.png" id="1_o1hnx"]
+[ext_resource type="Script" path="res://Scripts/castle_construction.gd" id="1_rjr4e"]
+[ext_resource type="Texture2D" uid="uid://dtjcffl1uligd" path="res://Textures/UI/BarV1_Bar.png" id="3_1lwg6"]
+[ext_resource type="Texture2D" uid="uid://dg66n7r3cnm65" path="res://Textures/UI/BarV1_ProgressBar.png" id="4_ftjs2"]
+[ext_resource type="Texture2D" uid="uid://d1vdjd08wwkmi" path="res://Textures/UI/#1 - Transparent Icons.png" id="5_bbwvb"]
+[ext_resource type="Script" path="res://Scripts/hammer.gd" id="6_qneem"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eaojx"]
+radius = 51.0
+height = 280.0
+
+[node name="CastleConstruction" type="StaticBody2D" groups=["Buildings"]]
+z_index = 1
+script = ExtResource("1_rjr4e")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_o1hnx")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(0, 62)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_eaojx")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = 57.0
+offset_right = 243.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+nine_patch_stretch = true
+texture_under = ExtResource("3_1lwg6")
+texture_progress = ExtResource("4_ftjs2")
+
+[node name="Hammer" type="Sprite2D" parent="."]
+z_index = 10
+texture_filter = 1
+position = Vector2(0, -39)
+scale = Vector2(1.5, 1.9)
+texture = ExtResource("5_bbwvb")
+region_enabled = true
+region_rect = Rect2(126.818, 324, 32.7273, 27.2727)
+script = ExtResource("6_qneem")
