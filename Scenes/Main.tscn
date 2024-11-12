@@ -335,6 +335,9 @@ position = Vector2(398, 169)
 [node name="Enemy9" parent="Map" instance=ExtResource("9_cqk2a")]
 position = Vector2(71, 493)
 
+[node name="Enemy10" parent="Map" instance=ExtResource("9_cqk2a")]
+position = Vector2(-265, -95)
+
 [node name="RegenerationTimer" type="Timer" parent="Map"]
 one_shot = true
 autostart = true
