@@ -1,44 +1,42 @@
 extends Node2D
 
-var selected_building_type = "House"
 var building_position = Vector2()
 var grid_size = 4
 var can_place_building = true
 
 var house_texture = preload("res://Textures/Constructions/House_Construction.png")
-var tower_texture = preload("res://Textures/Constructions/Tower_Construction.png")
 var build_radius = 300
+var player
 
 @onready var building_sprite = $BuildingSprite
 @onready var building_area = $BuildingSprite/BuildingArea
-@onready var player = get_node("../Player")
 @onready var house_collision = building_area.get_node("HouseCollision")
-@onready var tower_collision = building_area.get_node("TowerCollision")
 @onready var gamecontroller = get_parent()
 
+
 var costs = {
-	"House" : 20,
-	"Tower" : 50
+	"House" : 20
 }
 
 func _ready():
 	$BuildingSprite.texture = house_texture
+
+func setup_building_mode(player_ref):
+	self.player = player_ref
 	building_position = player.position + Vector2(0, -50)
 	$BuildingSprite.position = building_position
 	
-	house_collision.disabled = (selected_building_type != "House")
-	tower_collision.disabled = (selected_building_type != "Tower")
-
 func _process(_delta):
-	if Input.is_action_just_released("switch_building"):
-		switch_building_type()
-		
-	move_building_mold()
 	
-	can_place_building = building_area.can_place_building
+	if is_instance_valid(player):
+		move_building_mold()
+	
+		can_place_building = building_area.can_place_building
 
-	if Input.is_action_just_released("confirm_building"):
-		confirm_building()
+		if Input.is_action_just_released("confirm_building"):
+			confirm_building()
+	else:
+		queue_free()
 
 func move_building_mold():
 	var movement = Vector2()
@@ -59,29 +57,25 @@ func move_building_mold():
 
 	$BuildingSprite.position = building_position
 
-func switch_building_type():
-	if selected_building_type == "House":
-		selected_building_type = "Tower"
-		$BuildingSprite.texture = tower_texture
-	else:
-		selected_building_type = "House"
-		$BuildingSprite.texture = house_texture
-	update_collision_shape()
-
-func update_collision_shape():
-	house_collision.disabled = (selected_building_type != "House")
-	tower_collision.disabled = (selected_building_type != "Tower")
-
 func confirm_building():
 	if not can_place_building:
 		flash_red()
 		return
 	
-	var cost = costs[selected_building_type]
+	var cost = costs["House"]
 	
-	if(player.has_trees(cost)):
-		player.deduct_trees(cost)
-		gamecontroller.add_building_to_queue(selected_building_type, building_position)
+	if(player.has_wood(cost)):
+		player.deduct_wood(cost)
+		var house_scene = preload("res://Scenes/HouseConstruction.tscn")
+		var new_house = house_scene.instantiate()
+		
+		new_house.position = building_position
+		
+		gamecontroller.add_child(new_house)
+		player.exit_building_mode()
+		queue_free()
+	else:
+		flash_red()
 
 
 func flash_red():

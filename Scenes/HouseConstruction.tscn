@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://b68e1ahcp1a8l"]
+
+[ext_resource type="Script" path="res://Scripts/house_construction.gd" id="1_q4nqh"]
+[ext_resource type="Texture2D" uid="uid://5qs30ltqvink" path="res://Textures/Constructions/House_Construction.png" id="1_td84m"]
+[ext_resource type="Texture2D" uid="uid://d1vdjd08wwkmi" path="res://Textures/UI/#1 - Transparent Icons.png" id="3_8ijve"]
+[ext_resource type="Texture2D" uid="uid://dtjcffl1uligd" path="res://Textures/UI/BarV1_Bar.png" id="3_p6ijn"]
+[ext_resource type="Script" path="res://Scripts/hammer.gd" id="4_kwpo1"]
+[ext_resource type="Texture2D" uid="uid://dg66n7r3cnm65" path="res://Textures/UI/BarV1_ProgressBar.png" id="5_q8ihb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vcrpf"]
+size = Vector2(93, 86)
+
+[node name="HouseConstruction" type="StaticBody2D" groups=["Buildings"]]
+script = ExtResource("1_q4nqh")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_td84m")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_vcrpf")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -27.0
+offset_top = 28.0
+offset_right = 245.0
+offset_bottom = 49.0
+scale = Vector2(0.2, 0.2)
+nine_patch_stretch = true
+texture_under = ExtResource("3_p6ijn")
+texture_progress = ExtResource("5_q8ihb")
+
+[node name="Hammer" type="Sprite2D" parent="."]
+z_index = 10
+texture_filter = 1
+position = Vector2(0, -32)
+scale = Vector2(1.5, 1.9)
+texture = ExtResource("3_8ijve")
+region_enabled = true
+region_rect = Rect2(126.818, 324, 32.7273, 27.2727)
+script = ExtResource("4_kwpo1")

@@ -2,16 +2,42 @@ extends "res://Scripts/player_base.gd"
 
 var is_building_mode = false
 var is_collecting = false
-@onready var tree_map_layer = get_parent().get_node("Trees")
+var is_constructing = false
+@onready var building_mode_scene = preload("res://Scenes/ConstructionMode.tscn")
+var building_mode_instance: Node2D = null
 @onready var axe_area = $AxeArea
+@onready var hammer_area = $HammerArea
 
 func _ready():
 	player_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
-	var tree_nodes = get_tree().get_nodes_in_group("Trees")
-	for tree in tree_nodes:
-		tree.connect("tree_collected", Callable(self, "gather_trees"))
+
+func _input(_event):
+	if Input.is_action_just_released("enter_building_mode"):
+		enter_building_mode()
+	if Input.is_action_just_released("exit_building_mode") and is_building_mode:
+		exit_building_mode()
+
+func enter_building_mode():
+	if not is_building_mode:
+		is_building_mode = true
+		player_sprite.play("idle")
+		building_mode_instance = building_mode_scene.instantiate()
+		building_mode_instance.setup_building_mode(self)
+		game_controller.add_child(building_mode_instance)
+
+func exit_building_mode():
+	if is_building_mode:
+		is_building_mode = false
+		if building_mode_instance:
+			building_mode_instance.queue_free()
+			building_mode_instance = null
+	
 
 func _physics_process(delta):
+	
+	if is_building_mode:
+		return
+	
 	var enemies = get_tree().get_nodes_in_group("Enemies")
 
 	if enemies.size() > 0:
@@ -21,8 +47,10 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_released("pawn_collect"):
 		collect()
+	if Input.is_action_just_released("pawn_construct"):
+		construct()
 	
-	if is_collecting:
+	if is_collecting or is_constructing:
 		return
 	
 	move()
@@ -32,15 +60,21 @@ func _on_animation_finished():
 		test_collect()
 		is_collecting=false
 		player_sprite.play("idle")
+	if(player_sprite.animation=="constructing"):
+		test_construct()
+		is_constructing=false
+		player_sprite.play("idle")
 
 
 func flip():
 	if direction.x > 0:
 		player_sprite.flip_h = false
 		axe_area.scale.x = 1
+		hammer_area.scale.x = 1
 	elif direction.x < 0:
 		player_sprite.flip_h = true
 		axe_area.scale.x = -1
+		hammer_area.scale.x = -1
 	
 func not_moving():
 	if not is_collecting:
@@ -51,7 +85,7 @@ func not_moving():
 		player_sprite.play("collecting")
 
 func collect():	
-	if not is_collecting:
+	if not is_collecting and not is_constructing:
 		is_collecting = true
 		player_sprite.play("collecting")
 		
@@ -60,6 +94,17 @@ func test_collect():
 	for body in overlapping_bodies:
 		if body.is_in_group("Trees"):
 			body.collect()
+
+func construct():
+	if not is_constructing and not is_collecting:
+		is_constructing = true
+		player_sprite.play("constructing")
+
+func test_construct():
+	var overlapping_bodies = hammer_area.get_overlapping_bodies()
+	for body in overlapping_bodies:
+		if body.is_in_group("Buildings"):
+			body.build()
 
 func gather_trees(amount):
 	gather_resource("wood", amount)

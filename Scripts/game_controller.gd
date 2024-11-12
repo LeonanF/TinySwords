@@ -21,7 +21,7 @@ var playerType = "Warrior"
 var is_switching = false
 var last_position= Vector2(-600,600)
 var last_health = 100
-var last_wood = 0
+var last_wood = 20
 var last_meat = 0
 var last_gold = 0
 
