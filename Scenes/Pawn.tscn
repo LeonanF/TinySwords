@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dkvsw3gdjpc6m"]
+[gd_scene load_steps=43 format=3 uid="uid://dkvsw3gdjpc6m"]
 
 [ext_resource type="Script" path="res://Scripts/pawn.gd" id="1_x6tru"]
 [ext_resource type="Texture2D" uid="uid://cgduca0j8mf78" path="res://Textures/Characters/Pawn_Purple.png" id="1_yyw6a"]
@@ -191,7 +191,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_da6x4")
 }],
-"loop": true,
+"loop": false,
 "name": &"constructing",
 "speed": 10.0
 }, {
@@ -293,7 +293,10 @@ radius = 16.0
 height = 42.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6007i"]
-size = Vector2(45, 33.25)
+size = Vector2(42.5, 24.625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_602bq"]
+size = Vector2(46, 26.5)
 
 [node name="Pawn" type="CharacterBody2D" groups=["Players"]]
 z_index = 1
@@ -308,10 +311,8 @@ SPEED = 350.0
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_x8vso")
-animation = &"resource_walking"
+animation = &"constructing"
 autoplay = "idle"
-frame = 5
-frame_progress = 1.0
 
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(0, 13)
@@ -337,7 +338,13 @@ position_smoothing_speed = 20.0
 [node name="AxeArea" type="Area2D" parent="."]
 
 [node name="Axe" type="CollisionShape2D" parent="AxeArea"]
-position = Vector2(50.5, 13)
+position = Vector2(52, 13)
 shape = SubResource("RectangleShape2D_6007i")
+
+[node name="HammerArea" type="Area2D" parent="."]
+
+[node name="Hammer" type="CollisionShape2D" parent="HammerArea"]
+position = Vector2(52, 17.75)
+shape = SubResource("RectangleShape2D_602bq")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

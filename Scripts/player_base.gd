@@ -8,6 +8,7 @@ class_name Player
 @onready var camera = $Camera
 @onready var attacked_timer = get_parent().get_node("AttackedTimer")
 @onready var regen_timer = get_parent().get_node("RegenerationTimer")
+@onready var game_controller = get_parent().get_parent().get_node("GameController")
 @export var SPEED = 300.0
 @export var wood = 0
 @export var meat = 0
@@ -40,6 +41,7 @@ func has_wood(cost):
 
 func deduct_wood(amount):
 	wood -= amount
+	update_resource_banners()
 
 func gather_resource(resource_type: String, amount: int):
 	match resource_type:

@@ -1,6 +1,5 @@
 [gd_scene load_steps=48 format=4 uid="uid://bvi2pjs0urndr"]
 
-[ext_resource type="Script" path="res://Scripts/building_queue.gd" id="2_sx1sb"]
 [ext_resource type="TileSet" uid="uid://col3ak6sc7mi5" path="res://Textures/Maps/water.tres" id="3_ppl7a"]
 [ext_resource type="TileSet" uid="uid://xwjpvhue11ak" path="res://Textures/Maps/ground_elevation.tres" id="4_fjllr"]
 [ext_resource type="TileSet" uid="uid://bpws5w5tjmxon" path="res://Textures/Maps/foam.tres" id="4_m6r5m"]
@@ -13,6 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/game_controller.gd" id="10_gr8gc"]
 [ext_resource type="PackedScene" uid="uid://dpfwb3eb4ee3" path="res://Scenes/Scarecrow.tscn" id="10_itxlt"]
 [ext_resource type="Texture2D" uid="uid://cuk5w6t3c4d46" path="res://Textures/Decoration/11.png" id="11_2vai5"]
+[ext_resource type="PackedScene" uid="uid://cgswr8colisrl" path="res://Scenes/House.tscn" id="11_aryb4"]
 [ext_resource type="PackedScene" uid="uid://bt2h5wo4kb0om" path="res://Scenes/RoadSign.tscn" id="11_k53m0"]
 [ext_resource type="Texture2D" uid="uid://duckehaf7rfi3" path="res://Textures/Decoration/12.png" id="12_ddfhw"]
 [ext_resource type="Texture2D" uid="uid://dv4kvdi4eaixr" path="res://Textures/Decoration/13.png" id="13_feov0"]
@@ -131,13 +131,48 @@ sources/13 = SubResource("TileSetAtlasSource_djf36")
 sources/14 = SubResource("TileSetAtlasSource_3gt0f")
 sources/15 = SubResource("TileSetAtlasSource_rkuqx")
 
+[sub_resource type="GDScript" id="GDScript_jpj60"]
+script/source = "extends Node2D
+
+var construction_queue = []
+
+func add_to_queue(building_type, b_position):
+	construction_queue.append({\"type\": building_type, \"position\": b_position})
+	get_parent().spawn_pawns(b_position)
+	check_for_available_pawn()
+
+func check_for_available_pawn():
+	var pawn = find_available_pawn()
+	if pawn and construction_queue.size() > 0:
+		var next_task = construction_queue.pop_front()
+		pawn.assign_task(next_task)
+
+func find_available_pawn():
+	for pawn in get_tree().get_nodes_in_group(\"Pawns\"):
+		if pawn.is_available():
+			return pawn
+	return get_tree().get_nodes_in_group(\"Pawns\").front()
+
+func has_task():
+	return construction_queue.size() > 0
+
+func get_next_task():
+	if has_task():
+		return construction_queue[0]
+	return null
+
+func complete_task(task):
+	if construction_queue.size() > 0:
+		construction_queue.pop_front()
+"
+
 [node name="Main" type="Node2D"]
 
 [node name="GameController" type="Node2D" parent="."]
 script = ExtResource("10_gr8gc")
 
 [node name="BuildingQueue" type="Node2D" parent="GameController"]
-script = ExtResource("2_sx1sb")
+script = SubResource("GDScript_jpj60")
 
 [node name="Map" type="Node2D" parent="."]
 show_behind_parent = true
