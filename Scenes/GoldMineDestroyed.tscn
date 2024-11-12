@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://chdtlxtpc1dx7"]
+
+[ext_resource type="Script" path="res://Scripts/gold_mine_destroyed.gd" id="1_jwkg7"]
+[ext_resource type="Texture2D" uid="uid://dei4lgvwaan8e" path="res://Textures/Resources/Gold Mine/GoldMine_Destroyed.png" id="1_yyh2f"]
+[ext_resource type="Texture2D" uid="uid://d1vdjd08wwkmi" path="res://Textures/UI/#1 - Transparent Icons.png" id="3_masac"]
+[ext_resource type="Script" path="res://Scripts/hammer.gd" id="4_4iiea"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qnmvd"]
+radius = 28.0
+height = 152.0
+
+[node name="GoldMineDestroyed" type="StaticBody2D" groups=["MineDestroyed"]]
+z_index = 1
+y_sort_enabled = true
+collision_layer = 3
+script = ExtResource("1_jwkg7")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_yyh2f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qnmvd")
+
+[node name="Hammer" type="Sprite2D" parent="."]
+z_index = 10
+texture_filter = 1
+position = Vector2(0, -80)
+scale = Vector2(1.5, 1.9)
+texture = ExtResource("3_masac")
+region_enabled = true
+region_rect = Rect2(126.818, 324, 32.7273, 27.2727)
+script = ExtResource("4_4iiea")

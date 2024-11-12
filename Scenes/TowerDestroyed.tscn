@@ -9,6 +9,7 @@ height = 142.0
 
 [node name="TowerDestroyed" type="StaticBody2D" groups=["Destroyed"]]
 z_index = 1
+collision_layer = 3
 script = ExtResource("1_qxxms")
 
 [node name="Body" type="CollisionShape2D" parent="."]

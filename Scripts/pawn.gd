@@ -106,6 +106,8 @@ func test_construct():
 			body.build()
 		if body.is_in_group("Destroyed"):
 			body.restore()
+		if body.is_in_group("MineDestroyed"):
+			body.restore(self)
 
 			
 func gather_trees(amount):

@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://b1600mc2ndgnv"]
+
+[ext_resource type="Texture2D" uid="uid://dspovtrlv4f8h" path="res://Textures/Resources/Gold Mine/GoldMine_Inactive.png" id="1_rrtt6"]
+[ext_resource type="Script" path="res://Scripts/gold_mine.gd" id="1_vwqxp"]
+[ext_resource type="Texture2D" uid="uid://bhnx8a0a5wxbp" path="res://Textures/Resources/Gold Mine/GoldMine_Active.png" id="2_8o6wi"]
+[ext_resource type="PackedScene" uid="uid://i4vjfchbltmw" path="res://Scenes/GoldBag.tscn" id="4_jh64c"]
+[ext_resource type="Texture2D" uid="uid://d1vdjd08wwkmi" path="res://Textures/UI/#1 - Transparent Icons.png" id="5_wocjn"]
+[ext_resource type="Script" path="res://Scripts/coin.gd" id="6_mcl8f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_agjn1"]
+radius = 37.0
+height = 156.0
+
+[node name="GoldMine" type="StaticBody2D"]
+z_index = 1
+y_sort_enabled = true
+collision_layer = 3
+script = ExtResource("1_vwqxp")
+active_sprite = ExtResource("2_8o6wi")
+inactive_sprite = ExtResource("1_rrtt6")
+gold_bag_scene = ExtResource("4_jh64c")
+gold_spawn_position = Vector2(0, 70)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_rrtt6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_agjn1")
+
+[node name="Coin" type="Sprite2D" parent="."]
+position = Vector2(0, -95)
+scale = Vector2(1.5, 1.8)
+texture = ExtResource("5_wocjn")
+region_enabled = true
+region_rect = Rect2(227.205, 387.055, 24.5692, 25.2715)
+script = ExtResource("6_mcl8f")

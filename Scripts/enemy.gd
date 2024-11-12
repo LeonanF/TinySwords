@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
 const SPEED = 200
-@export var damage: int = 10
-@export var health: int = 50
-@export var detection_range: float = 300
+@export var damage: int = 15
+@export var health: int = 75
+@export var detection_range: float = 200
+@export var gold_value: int = 10
 
 var patrol_radius: float = 100
 var patrol_timer = 0.0
@@ -19,6 +20,8 @@ var player_in_perception_range = false
 var player = null
 var is_attacking = false
 
+signal enemy_killed(gold_amount)
+
 @onready var attackCooldown = $AttackCooldown
 @onready var enemy_sprite = $Sprite
 @onready var perception_range = $PerceptionRange
@@ -28,6 +31,7 @@ var is_attacking = false
 signal attack_done(damage_amount)
 
 func _ready():
+	gold_value = randf_range(8, 15)
 	patrol_center = global_position
 	var players = get_tree().get_nodes_in_group("Players")
 	
@@ -73,7 +77,7 @@ func _physics_process(delta):
 	
 	if not player_in_perception_range:
 		enemy_sprite.flip_h = false if velocity.x >= 0 else true
-		if global_position.distance_to(player.global_position) <= detection_range and can_search_player:
+		if global_position.distance_to(player.global_position) <= detection_range and can_search_player and not has_collided_with_wall():
 			nav_agent.target_position = player.global_position
 			var current_agent_position = global_position
 			var next_path_position = nav_agent.get_next_path_position()
@@ -184,6 +188,7 @@ func _on_player_attack_received(damage_amount, body):
 			die()
 
 func die():
+	enemy_killed.emit(gold_value)
 	queue_free()
 
 func _flash_damage_effect():

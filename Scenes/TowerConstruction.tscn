@@ -13,6 +13,7 @@ height = 98.0
 
 [node name="TowerConstruction" type="StaticBody2D" groups=["Buildings"]]
 z_index = 1
+collision_layer = 3
 script = ExtResource("1_6naqq")
 
 [node name="Sprite" type="Sprite2D" parent="."]

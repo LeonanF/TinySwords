@@ -274,7 +274,6 @@ z_index = 1
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_ivjx2")
-damage = 20
 
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -299,5 +298,6 @@ one_shot = true
 autostart = true
 
 [node name="StartPatrolling" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 autostart = true

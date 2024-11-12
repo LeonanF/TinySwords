@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://i4vjfchbltmw"]
+
+[ext_resource type="Texture2D" uid="uid://ddd8pjwpuy0xy" path="res://Textures/Resources/Resources/G_Idle.png" id="1_ffcrg"]
+[ext_resource type="Script" path="res://Scripts/gold_bag.gd" id="1_j3gvu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d6agk"]
+radius = 25.0
+height = 50.0
+
+[node name="GoldBag" type="Area2D"]
+z_index = 1
+script = ExtResource("1_j3gvu")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_ffcrg")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(8, 11)
+shape = SubResource("CapsuleShape2D_d6agk")

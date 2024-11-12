@@ -9,6 +9,7 @@ height = 336.0
 
 [node name="CastleDestroyed" type="StaticBody2D" groups=["Destroyed"]]
 z_index = 1
+collision_layer = 3
 script = ExtResource("1_xvdio")
 
 [node name="Sprite" type="Sprite2D" parent="."]

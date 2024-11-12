@@ -3,13 +3,14 @@ extends "res://Scripts/player_base.gd"
 @onready var attack_cooldown = $AttackCooldown
 @onready var attack_range = $AttackRange
 
-
+var sheep_in_range = false
 var enemy_in_range = false
 var is_attacking = false
 var on_attack_cooldown = false
 var is_double_attacking = false
 
 var enemies = []
+var sheeps = []
 
 signal attack_done(amount, body)
 
@@ -18,10 +19,6 @@ func _ready():
 	attack_range.connect("body_entered", Callable(self, "_on_attack_range_entered"))
 	attack_range.connect("body_exited", Callable(self, "_on_attack_range_exited"))
 	player_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
-	
-	var gameController = get_parent()
-	gameController.connect("building_entered", Callable(self, "_on_building_entered"))
-	gameController.connect("building_exited", Callable(self, "_on_building_exited"))
 
 func _on_animation_finished():
 	var previous_animation = player_sprite.animation
@@ -57,13 +54,26 @@ func _physics_process(delta):
 		return
 	
 	var enemies = get_tree().get_nodes_in_group("Enemies")
+	var sheeps = get_tree().get_nodes_in_group("Sheeps")
 
 	if enemies.size() > 0:
 		for enemy in enemies:
 			if not enemy.is_connected("attack_done", Callable(self, "_on_enemy_attack_received")):
 				enemy.connect("attack_done", Callable(self, "_on_enemy_attack_received"))
+				enemy.connect("enemy_killed", Callable(self, "_on_enemy_killed"))
+	
+	if sheeps.size() > 0:
+		for sheep in sheeps:
+			if not sheep.is_connected("sheep_killed", Callable(self, "_on_sheep_killed")):
+				sheep.connect("sheep_killed", Callable(self, "_on_sheep_killed"))
 	
 	move()
+
+func _on_sheep_killed(meat_value):
+	gather_resource("meat", meat_value)
+	
+func _on_enemy_killed(gold_value):
+	gather_resource("gold", gold_value)
 
 func _on_body_entered(body):
 	if body.is_in_group("Enemies"):
@@ -85,11 +95,28 @@ func attack():
 				player_sprite.play("basic_attack_up")
 			else:
 				player_sprite.play("basic_attack_down")
-			
-			await get_tree().create_timer(0.3).timeout
 				
 			if enemy_in_range:
-				emit_signal("attack_done", damage, enemy)
+					attack_done.emit(damage, enemy)
+				
+		if not enemy_in_range:
+			for sheep in sheeps:
+				var direction_to_sheep = sheep.get_node("Sprite").global_position - player_sprite.global_position
+				if abs(direction_to_sheep.x) > abs(direction_to_sheep.y):
+					if direction_to_sheep.x < 0:
+						player_sprite.flip_h = true
+					else:
+						player_sprite.flip_h = false
+				elif direction_to_sheep.y < 0:
+					player_sprite.play("basic_attack_up")
+				else:
+					player_sprite.play("basic_attack_down")
+			
+				await get_tree().create_timer(0.3).timeout
+				
+				if sheep_in_range:
+					attack_done.emit(damage, sheep)
+			
 
 func double_attack():
 	
@@ -122,8 +149,17 @@ func _on_attack_range_entered(body):
 	if body.is_in_group("Enemies") and body not in enemies:
 		enemies.append(body)
 		enemy_in_range = true
+		
+	if body.is_in_group("Sheeps") and body not in sheeps:
+		sheeps.append(body)
+		sheep_in_range = true
+		print(body)
 
 func _on_attack_range_exited(body):
 	if body.is_in_group("Enemies"):
 		enemies.erase(body)
 		enemy_in_range = enemies.size() > 0
+		
+	if body.is_in_group("Sheeps"):
+		sheeps.erase(body)
+		sheep_in_range = sheeps.size() > 0

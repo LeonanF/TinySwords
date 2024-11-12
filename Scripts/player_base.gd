@@ -13,6 +13,8 @@ class_name Player
 @export var wood = 0
 @export var meat = 0
 @export var gold = 0
+@export var eat_amount = 10
+@export var eat_health_regen = 20
 var health: int = max_health
 var health_bar : TextureProgressBar
 var meat_banner: CanvasLayer
@@ -43,6 +45,20 @@ func deduct_wood(amount):
 	wood -= amount
 	update_resource_banners()
 
+func has_gold(cost):
+	return gold >= cost
+
+func deduct_gold(amount):
+	gold -= amount
+	update_resource_banners()
+
+func has_meat(cost):
+	return meat >= cost
+
+func deduct_meat(amount):
+	meat -= amount
+	update_resource_banners()
+
 func gather_resource(resource_type: String, amount: int):
 	match resource_type:
 		"meat":
@@ -51,6 +67,9 @@ func gather_resource(resource_type: String, amount: int):
 			wood += amount
 		"gold":
 			gold += amount
+			player_sprite.modulate = Color(1, 0.84, 0)
+			await get_tree().create_timer(0.2).timeout
+			player_sprite.modulate = Color(1, 1, 1)
 
 	update_resource_banners()
 
@@ -59,9 +78,18 @@ func _ready():
 
 func _process(delta):
 	if regen_timer and attacked_timer and regen_timer.is_stopped() and attacked_timer.is_stopped() and health<=100:
-		health += 2
+		health += 1
 		regen_timer.start()
 		update_health_bar()
+	if Input.is_action_just_released("eat"):
+		if has_meat(eat_amount) and max_health - health > eat_health_regen:
+			eat()
+			deduct_meat(eat_amount)
+
+func eat():
+	health+=eat_health_regen
+	update_health_bar()
+	update_resource_banners()
 
 func _on_move_right():
 	direction.x += 1

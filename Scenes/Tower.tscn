@@ -9,6 +9,7 @@ height = 104.0
 [node name="Tower" type="StaticBody2D" groups=["buildings"]]
 z_index = 1
 y_sort_enabled = true
+collision_layer = 3
 
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(0, 45)

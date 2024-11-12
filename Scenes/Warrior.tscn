@@ -400,6 +400,8 @@ radius = 92.0217
 z_index = 1
 y_sort_enabled = true
 position = Vector2(-600, 600)
+collision_layer = 3
+collision_mask = 5
 script = ExtResource("1_h3lkx")
 damage = 15
 SPEED = 200.0
@@ -416,6 +418,8 @@ position = Vector2(0, 17)
 shape = SubResource("CapsuleShape2D_61lhc")
 
 [node name="AttackRange" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
 shape = SubResource("CircleShape2D_skuif")
@@ -431,12 +435,3 @@ limit_top = -1364
 limit_right = 1640
 limit_bottom = 812
 position_smoothing_speed = 20.0
-
-[node name="RegenerationTimer" type="Timer" parent="."]
-one_shot = true
-autostart = true
-
-[node name="AttackedTimer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-autostart = true
