@@ -166,6 +166,7 @@ sources/14 = SubResource("TileSetAtlasSource_3gt0f")
 sources/15 = SubResource("TileSetAtlasSource_rkuqx")
 
 [node name="Main" type="Node2D"]
+position = Vector2(424, -276)
 
 [node name="GameController" type="Node2D" parent="."]
 script = ExtResource("10_gr8gc")
@@ -329,3 +330,7 @@ position = Vector2(-201, -574)
 [node name="Camera" type="Camera2D" parent="."]
 enabled = false
 zoom = Vector2(0.75, 0.75)
+limit_left = -10000128
+limit_top = -10000128
+limit_right = 10000128
+limit_bottom = 10000128

@@ -429,10 +429,10 @@ autostart = true
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(0.75, 0.75)
-limit_left = -1024
-limit_top = -896
-limit_right = 1024
-limit_bottom = 896
+limit_left = -1152
+limit_top = -1024
+limit_right = 1152
+limit_bottom = 1024
 position_smoothing_speed = 20.0
 
 [node name="RegenerationTimer" type="Timer" parent="."]
