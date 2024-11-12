@@ -2,6 +2,8 @@ extends "res://Scripts/player_base.gd"
 
 @onready var attack_cooldown = $AttackCooldown
 @onready var attack_range = $AttackRange
+@onready var attack_audio = $AttackAudio
+@onready var double_attack_audio = $DoubleAttackAudio
 
 var sheep_in_range = false
 var enemy_in_range = false
@@ -26,7 +28,9 @@ func _on_animation_finished():
 	
 	if previous_animation == "basic_attack" or previous_animation == "basic_attack_up" or previous_animation == "basic_attack_down":
 		if is_double_attacking:
-			double_attack()
+			if enemy_in_range:
+				double_attack_audio.play()
+				double_attack()
 			
 		on_attack_cooldown = true
 		is_attacking = false
@@ -83,6 +87,7 @@ func attack():
 	if not on_attack_cooldown:
 		is_attacking = true
 		player_sprite.play("basic_attack")
+		attack_audio.play()
 		
 		for enemy in enemies:
 			var direction_to_player = enemy.get_node("Sprite").global_position - player_sprite.global_position
@@ -119,7 +124,6 @@ func attack():
 			
 
 func double_attack():
-	
 	for enemy in enemies:
 		var direction_to_enemy = enemy.global_position - global_position
 		attack_range.rotation = direction_to_enemy.angle()

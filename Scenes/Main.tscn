@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://bvi2pjs0urndr"]
+[gd_scene load_steps=56 format=4 uid="uid://bvi2pjs0urndr"]
 
 [ext_resource type="TileSet" uid="uid://col3ak6sc7mi5" path="res://Textures/Maps/water.tres" id="3_ppl7a"]
 [ext_resource type="TileSet" uid="uid://xwjpvhue11ak" path="res://Textures/Maps/ground_elevation.tres" id="4_fjllr"]
@@ -31,6 +31,8 @@
 [ext_resource type="PackedScene" uid="uid://chdtlxtpc1dx7" path="res://Scenes/GoldMineDestroyed.tscn" id="30_sbf6u"]
 [ext_resource type="PackedScene" uid="uid://dmj6d60b4xeh5" path="res://Scenes/TowerDestroyed.tscn" id="30_t67uo"]
 [ext_resource type="PackedScene" uid="uid://bngpcwxloerhu" path="res://Scenes/Sheep.tscn" id="31_tlyf0"]
+[ext_resource type="AudioStream" uid="uid://cjvtejjpxsx1h" path="res://Audio/loop_music.wav" id="32_ra8c5"]
+[ext_resource type="AudioStream" uid="uid://d0a04ioa1a7gy" path="res://Audio/Beach.ogg" id="33_uuw8r"]
 
 [sub_resource type="GDScript" id="GDScript_jpj60"]
 script/source = "extends Node2D
@@ -408,3 +410,12 @@ limit_left = -10000128
 limit_top = -10000128
 limit_right = 10000128
 limit_bottom = 10000128
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("32_ra8c5")
+autoplay = true
+
+[node name="SeaSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("33_uuw8r")
+volume_db = -5.0
+autoplay = true

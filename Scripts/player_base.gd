@@ -9,6 +9,9 @@ class_name Player
 @onready var attacked_timer = get_parent().get_node("AttackedTimer")
 @onready var regen_timer = get_parent().get_node("RegenerationTimer")
 @onready var game_controller = get_parent().get_parent().get_node("GameController")
+@onready var player_eat_audio = $PlayerEatAudio
+@onready var player_hitted_audio = $PlayerHittedAudio
+@onready var player_walk_audio = $WalkAudio
 @export var SPEED = 300.0
 @export var wood = 0
 @export var meat = 0
@@ -20,6 +23,7 @@ var health_bar : TextureProgressBar
 var meat_banner: CanvasLayer
 var wood_banner: CanvasLayer
 var gold_banner: CanvasLayer
+
 
 var invulnerable = false
 var is_walking = false
@@ -77,7 +81,7 @@ func _ready():
 	pass
 
 func _process(delta):
-	if regen_timer and attacked_timer and regen_timer.is_stopped() and attacked_timer.is_stopped() and health<=100:
+	if regen_timer and attacked_timer and regen_timer.is_stopped() and attacked_timer.is_stopped() and health<max_health:
 		health += 1
 		regen_timer.start()
 		update_health_bar()
@@ -88,6 +92,7 @@ func _process(delta):
 
 func eat():
 	health+=eat_health_regen
+	player_eat_audio.play()
 	update_health_bar()
 	update_resource_banners()
 
@@ -104,14 +109,23 @@ func _on_move_down():
 	direction.y += 1
 
 func move():
+	
 	if Input.is_action_pressed("ui_right"):
 		_on_move_right()
+		if not player_walk_audio.playing:
+			player_walk_audio.play()
 	if Input.is_action_pressed("ui_left"):
 		_on_move_left()
+		if not player_walk_audio.playing:
+			player_walk_audio.play()
 	if Input.is_action_pressed("ui_down"):
 		_on_move_down()
+		if not player_walk_audio.playing:
+			player_walk_audio.play()
 	if Input.is_action_pressed("ui_up"):
 		_on_move_up()
+		if not player_walk_audio.playing:
+			player_walk_audio.play()
 
 	if direction != Vector2.ZERO:
 		is_walking = true
@@ -133,6 +147,7 @@ func flip():
 func not_moving():
 	velocity = Vector2.ZERO
 	player_sprite.play("idle")
+	player_walk_audio.stop()
 
 func update_health_bar():
 	health_bar.value = health
@@ -159,6 +174,7 @@ func _flash_damage_effect():
 	invulnerable = false
 
 func _on_enemy_attack_received(damage):
+	player_hitted_audio.play()
 	attacked_timer.stop()
 	attacked_timer.start()
 	health -= damage

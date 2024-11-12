@@ -7,6 +7,8 @@ var is_constructing = false
 var building_mode_instance: Node2D = null
 @onready var axe_area = $AxeArea
 @onready var hammer_area = $HammerArea
+@onready var build_audio = $BuildAudio
+@onready var chop_audio = $ChopAudio
 
 func _ready():
 	player_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
@@ -44,6 +46,15 @@ func _physics_process(delta):
 		for enemy in enemies:
 			if not enemy.is_connected("attack_done", Callable(self, "_on_enemy_attack_received")):
 				enemy.connect("attack_done", Callable(self, "_on_enemy_attack_received"))
+	
+	
+	var trees = get_tree().get_nodes_in_group("Trees")
+
+	if trees.size() > 0:
+		for tree in trees:
+			if not tree.is_connected("tree_collected", Callable(self, "gather_trees")):
+				tree.connect("tree_collected", Callable(self, "gather_trees"))
+	
 	
 	if Input.is_action_just_released("pawn_collect"):
 		collect()
@@ -85,6 +96,7 @@ func not_moving():
 
 func collect():	
 	if not is_collecting and not is_constructing:
+		chop_audio.play()
 		is_collecting = true
 		player_sprite.play("collecting")
 		
@@ -96,6 +108,7 @@ func test_collect():
 
 func construct():
 	if not is_constructing and not is_collecting:
+		build_audio.play()
 		is_constructing = true
 		player_sprite.play("constructing")
 

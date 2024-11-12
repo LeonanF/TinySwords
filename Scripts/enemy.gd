@@ -27,6 +27,8 @@ signal enemy_killed(gold_amount)
 @onready var perception_range = $PerceptionRange
 @onready var nav_agent = $NavigationEnemy
 @onready var start_patrolling = $StartPatrolling
+@onready var attack_audio = $AttackAudio
+@onready var enemy_hitted_audio = $EnemyHittedAudio
 
 signal attack_done(damage_amount)
 
@@ -138,7 +140,7 @@ func choose_new_patrol_direction():
 		patrol_direction *= -1
 
 func _on_body_entered(body):
-	if body.is_in_group("Players"):
+	if is_instance_valid(body) and body.is_in_group("Players"):
 		player_in_perception_range = true
 		player = body
 		face_player()
@@ -167,6 +169,7 @@ func attack():
 		else:
 			enemy_sprite.play("attack_down")
 		
+		attack_audio.play()
 
 func face_player():
 	if player:
@@ -180,6 +183,7 @@ func face_player():
 
 func _on_player_attack_received(damage_amount, body):
 	if body == self:
+		enemy_hitted_audio.play()
 		health -= damage_amount
 		
 		_flash_damage_effect()

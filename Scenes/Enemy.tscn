@@ -1,7 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://cxoql8lpf7x1m"]
+[gd_scene load_steps=41 format=3 uid="uid://cxoql8lpf7x1m"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_ivjx2"]
 [ext_resource type="Texture2D" uid="uid://u1p0mgamb0s5" path="res://Textures/Characters/Torch_Red.png" id="1_x0nwj"]
+[ext_resource type="AudioStream" uid="uid://cenvuy8g8oamp" path="res://Audio/torch_attack.ogg" id="3_6dlpu"]
+[ext_resource type="AudioStream" uid="uid://dvi2g51be6nod" path="res://Audio/enemy_hitted.ogg" id="4_w2dq4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_76h1f"]
 radius = 23.0
@@ -291,7 +293,6 @@ shape = SubResource("CircleShape2D_352w7")
 
 [node name="NavigationEnemy" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
-debug_enabled = true
 
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true
@@ -301,3 +302,9 @@ autostart = true
 wait_time = 2.0
 one_shot = true
 autostart = true
+
+[node name="AttackAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6dlpu")
+
+[node name="EnemyHittedAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_w2dq4")
