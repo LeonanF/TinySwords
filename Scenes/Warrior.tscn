@@ -222,7 +222,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"basic_attack",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -245,7 +245,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"basic_attack_down",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -268,7 +268,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"basic_attack_up",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -291,7 +291,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"double_attack",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -317,7 +317,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"double_attack_down",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -340,7 +340,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"double_attack_up",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -407,10 +407,8 @@ SPEED = 200.0
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_lqrse")
-animation = &"basic_attack_down"
+animation = &"double_attack_down"
 autoplay = "idle"
-frame = 5
-frame_progress = 1.0
 
 [node name="Body" type="CollisionShape2D" parent="."]
 texture_filter = 1
@@ -420,7 +418,6 @@ shape = SubResource("CapsuleShape2D_61lhc")
 [node name="AttackRange" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
-visible = false
 shape = SubResource("CircleShape2D_skuif")
 
 [node name="AttackCooldown" type="Timer" parent="."]

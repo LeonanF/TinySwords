@@ -376,7 +376,7 @@ tile_map_data = PackedByteArray("AADz/wkAAAACAAAAAADy/wkAAAABAAAAAADx/wkAAAABAAA
 tile_set = SubResource("TileSet_co1r8")
 
 [node name="TowerDestroyed2" parent="Map" instance=ExtResource("30_t67uo")]
-position = Vector2(346, 825)
+position = Vector2(350, 821)
 
 [node name="Camera" type="Camera2D" parent="."]
 enabled = false
