@@ -24,7 +24,6 @@ var meat_banner: CanvasLayer
 var wood_banner: CanvasLayer
 var gold_banner: CanvasLayer
 
-
 var invulnerable = false
 var is_walking = false
 
@@ -89,6 +88,8 @@ func _process(delta):
 		if has_meat(eat_amount) and max_health - health > eat_health_regen:
 			eat()
 			deduct_meat(eat_amount)
+	if not is_walking:
+		player_walk_audio.stop()
 
 func eat():
 	health+=eat_health_regen
@@ -138,6 +139,7 @@ func move():
 	move_and_slide()
 	direction = Vector2.ZERO
 
+	
 func flip():
 	if direction.x > 0:
 		player_sprite.flip_h = false

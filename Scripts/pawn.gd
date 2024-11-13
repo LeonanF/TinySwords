@@ -63,7 +63,7 @@ func _physics_process(delta):
 		
 	if is_collecting or is_constructing:
 		return
-	
+		
 	move()
 	
 func _on_animation_finished():
@@ -90,9 +90,11 @@ func not_moving():
 	if not is_collecting:
 		velocity = Vector2.ZERO
 		player_sprite.play("idle")
+		player_walk_audio.stop()
 	else:
 		velocity = Vector2.ZERO
 		player_sprite.play("collecting")
+		player_walk_audio.stop()
 
 func collect():	
 	if not is_collecting and not is_constructing:

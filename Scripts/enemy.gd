@@ -144,9 +144,19 @@ func choose_new_patrol_direction():
 
 func _on_body_entered(body):
 	if is_instance_valid(body) and body.is_in_group("Players"):
-		player_in_perception_range = true
-		player = body
-		face_player()
+		var space_state = get_world_2d().direct_space_state
+		var query = PhysicsRayQueryParameters2D.create(global_position, body.global_position)
+		query.exclude = [self, body]
+		
+		var result = space_state.intersect_ray(query)
+		
+		if not result:
+			player_in_perception_range = true
+			player = body
+			face_player()
+		else:
+			player_in_perception_range = false
+			player = null
 
 func _on_body_exited(body):
 	if body.is_in_group("Players"):

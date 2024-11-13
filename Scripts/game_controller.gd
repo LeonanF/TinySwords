@@ -71,7 +71,7 @@ func swap_characters():
 func setup_pawn():
 
 	playerType = "Pawn"
-	
+		
 	if player:
 		sync_character_state()
 		player.queue_free()

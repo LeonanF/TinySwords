@@ -6,8 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://dvi2g51be6nod" path="res://Audio/enemy_hitted.ogg" id="4_w2dq4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_76h1f"]
-radius = 23.0
-height = 62.0
+radius = 20.0
+height = 52.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3lrgm"]
 atlas = ExtResource("1_x0nwj")
@@ -278,7 +278,7 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_ivjx2")
 
 [node name="Body" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_76h1f")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -287,12 +287,14 @@ sprite_frames = SubResource("SpriteFrames_afqyi")
 animation = &"attack_up"
 
 [node name="PerceptionRange" type="Area2D" parent="."]
+visible = false
 
 [node name="PerceptioRange" type="CollisionShape2D" parent="PerceptionRange"]
 shape = SubResource("CircleShape2D_352w7")
 
 [node name="NavigationEnemy" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
+debug_enabled = true
 
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true

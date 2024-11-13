@@ -12,7 +12,6 @@ var enemy_in_range = false
 var is_attacking = false
 var on_attack_cooldown = false
 var is_double_attacking = false
-
 var enemies = []
 var sheeps = []
 
@@ -23,7 +22,7 @@ func _ready():
 	attack_range.connect("body_entered", Callable(self, "_on_attack_range_entered"))
 	attack_range.connect("body_exited", Callable(self, "_on_attack_range_exited"))
 	player_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
-
+	
 func _on_animation_finished():
 	var previous_animation = player_sprite.animation
 	player_sprite.play("idle")
@@ -150,17 +149,24 @@ func double_attack():
 		else:
 			is_double_attacking = false
 		
+
 	
 func _on_attack_range_entered(body):
-	if body.is_in_group("Enemies") and body not in enemies:
-		enemies.append(body)
-		enemy_in_range = true
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(global_position, body.global_position)
+	query.exclude = [self, body]
+	
+	var result = space_state.intersect_ray(query)
+	
+	if not result:
+		if body.is_in_group("Enemies") and body not in enemies:
+			enemies.append(body)
+			enemy_in_range = true
+	
+		if body.is_in_group("Sheeps") and body not in sheeps:
+			sheeps.append(body)
+			sheep_in_range = true
 		
-	if body.is_in_group("Sheeps") and body not in sheeps:
-		sheeps.append(body)
-		sheep_in_range = true
-		print(body)
-
 func _on_attack_range_exited(body):
 	if body.is_in_group("Enemies"):
 		enemies.erase(body)
