@@ -28,7 +28,7 @@ func _physics_process(delta):
 	var players = get_tree().get_nodes_in_group("Players")
 	
 	for player in players:
-		if not player.is_connected("attack_done", Callable(self, "_on_player_attack_received")):
+		if player is Warrior and not player.is_connected("attack_done", Callable(self, "_on_player_attack_received")):
 			player.connect("attack_done", Callable(self, "_on_player_attack_received"))
 	
 	if is_moving:

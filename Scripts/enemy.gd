@@ -107,8 +107,11 @@ func patrol(delta):
 			patrol_timer = 0
 			
 	if is_patrolling:
-		if patrol_timer <= 0 or has_collided_with_wall():
+		if patrol_timer <= 0:
 			choose_new_patrol_direction()
+			patrol_timer = 2.0
+		if has_collided_with_wall():
+			on_collide_patrol_direction()
 			patrol_timer = 2.0
 
 		velocity = patrol_direction * SPEED

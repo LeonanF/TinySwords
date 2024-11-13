@@ -1,5 +1,7 @@
 extends "res://Scripts/player_base.gd"
 
+class_name Warrior
+
 @onready var attack_cooldown = $AttackCooldown
 @onready var attack_range = $AttackRange
 @onready var attack_audio = $AttackAudio
